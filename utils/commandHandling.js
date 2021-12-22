@@ -9,6 +9,17 @@ module.exports = async (client, message) => {
 
     if (isBlacklisted) return;
 
+    guild = await client.databaseManagers.guilds.get(message.guild.id);
+
+    if (!guild) {
+        await client.databaseManagers.guilds.create({
+            id: message.guild.id,
+            name: message.guild.name,
+        });
+
+        guild = await client.databaseManagers.guilds.get(message.guild.id);
+    }
+
     const input = message.content.slice(prefix.length).trim().split(/ +/g);
 
     if (client.commands.has(input[0])) {
