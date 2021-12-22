@@ -1,0 +1,26 @@
+{
+    "name": "no-sussy-links",
+    "version": "1.0.0",
+    "description": "A Discord bot that prevents phishing",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/LockBlock-dev/NoSussyLinks.git"
+    },
+    "author": "LockBlock-dev",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/LockBlock-dev/NoSussyLinks/issues"
+    },
+    "homepage": "https://github.com/LockBlock-dev/NoSussyLinks#readme",
+    "dependencies": {
+        "axios": "^0.24.0",
+        "discord.js": "^13.3.1",
+        "dotenv": "^10.0.0",
+        "mongoose": "^6.1.2",
+        "simple-discord-webhooks": "^1.1.1"
+    }
+}

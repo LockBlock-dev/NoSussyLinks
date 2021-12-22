@@ -1,0 +1,10 @@
+require("dotenv").config();
+const { Client, Intents } = require("discord.js");
+
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+
+//client.dev = process.env.PRODUCTION ? false : true;
+
+require("./utils/loader.js")(client);
+
+client.login(process.env.DISCORD_TOKEN);
