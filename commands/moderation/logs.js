@@ -13,6 +13,7 @@ module.exports = {
 
         try {
             channel = await message.guild.channels.cache.get(args[0]);
+            if (!channel) channel = await message.guild.channels.fetch(args[0]);
         } catch (err) {
             return await message.reply({ embeds: [client.newError("Wrong channel ID!")] });
         }
