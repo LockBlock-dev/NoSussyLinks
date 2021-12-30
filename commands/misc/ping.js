@@ -4,7 +4,7 @@ module.exports = {
     name: "ping",
     description: "🏓 Pong !",
     usage: "ping",
-    cooldown: 2,
+    cooldown: 3,
     async execute(client, message) {
         const embed = new MessageEmbed().setDescription(`🏓 Pong`).addField("Latency", `${Math.round(client.ws.ping)} ms`);
 

@@ -5,7 +5,7 @@ module.exports = {
     name: "help",
     description: "💡 Help of the bot",
     usage: "help (command)",
-    cooldown: 2,
+    cooldown: 3,
     async execute(client, message, args) {
         const embed = new MessageEmbed();
         const command = args[0];

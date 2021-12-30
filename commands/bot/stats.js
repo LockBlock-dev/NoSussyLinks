@@ -4,7 +4,7 @@ module.exports = {
     name: "stats",
     description: "🔎 Check the database stats",
     usage: "stats",
-    cooldown: 5,
+    cooldown: 15,
     async execute(client, message) {
         const embed = new MessageEmbed()
             .setDescription("🔎 Database stats")
