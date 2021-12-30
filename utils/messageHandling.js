@@ -27,11 +27,9 @@ module.exports = async (client, message) => {
         total = (await client.databaseManagers.stats.get("phishing_attempts")).count;
 
         for (let match of matches) {
-            let domain = match.split("/").filter((n) => n);
-            if (domain[0].includes(":")) domain.shift();
-            if (domain[1]) domain[1] = `/${domain[1]}`;
+            let phish = new URL(match);
 
-            let res = await client.databaseManagers.domains.getByDomain(domain[0]);
+            let res = await client.databaseManagers.domains.getByDomain(phish.hostname);
             if (res) {
                 flagged.push(match);
             } else {
@@ -45,7 +43,7 @@ module.exports = async (client, message) => {
         }
 
         if (flagged.length > 0) {
-            await message.delete();
+            message.delete();
 
             await client.databaseManagers.stats.updateCount("phishing_attempts", total + flagged.length);
 
@@ -85,15 +83,15 @@ module.exports = async (client, message) => {
                         .addField("Author", `<@${message.author.id}>`)
                         .addField("Author id", message.author.id)
                         .addField(`Term${sussy.length > 1 ? "s" : ""}`, `\`\`\`${sussy.join("\n")}\n\`\`\``)
-                        .addField("Message content", message.cleanContent);
+                        .addField("Message content", message.cleanContent)
+                        .addField(
+                            "\u200B",
+                            `Was this warning accurate? Please report the phishing URL${matches.length > 1 ? "s" : ""} by doing \`p!report ${
+                                matches[0]
+                            }\``
+                        );
 
-                    const warning = await channel.send({ embeds: [embed] });
-
-                    await warning.reply(
-                        `Was this warning accurate? Please report the phishing URL${matches.length > 1 ? "s" : ""} by doing \`p!report ${
-                            matches[0]
-                        }\``
-                    );
+                    await channel.send({ embeds: [embed] });
                 } else {
                     return await message.channel.send({
                         embeds: [client.newError("Log channel not found! Add one with the command: `p!logs [id]`")],
