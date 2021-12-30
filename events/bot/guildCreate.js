@@ -6,5 +6,7 @@ module.exports = {
             id: guild.id,
             name: guild.name,
         });
+
+        client.user.setActivity(`over ${client.guilds.cache.size} servers | p!help`, { type: "WATCHING" });
     },
 };
