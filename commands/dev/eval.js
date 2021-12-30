@@ -6,6 +6,8 @@ module.exports = {
     usage: "eval [code]",
     dev: true,
     async execute(client, message, args) {
+        message.delete();
+
         const code = args.join(" ");
         const embed = new MessageEmbed();
 
