@@ -27,7 +27,11 @@ module.exports = {
                 domain: domain,
             });
 
-            const embed = new MessageEmbed().setDescription("🔒 New domain added to the database").addField("Domain", domain).addField("Hash", hash);
+            const embed = new MessageEmbed()
+                .setDescription("🔒 New domain added to the database")
+                .addField("Domain", domain)
+                .addField("Hash", hash)
+                .setColor("#7289DA");
 
             await message.reply({ embeds: [embed] });
         } else {

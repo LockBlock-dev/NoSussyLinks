@@ -6,7 +6,7 @@ module.exports = {
     usage: "vote",
     cooldown: 15,
     async execute(client, message) {
-        const embed = new MessageEmbed().setDescription(`🗳 Vote here: https://top.gg/bot/XXXXXXXXXX`);
+        const embed = new MessageEmbed().setDescription(`🗳 Vote here: https://top.gg/bot/XXXXXXXXXX`).setColor("#7289DA");
 
         await message.reply({ embeds: [embed] });
     },

@@ -4,7 +4,7 @@ module.exports = {
     name: "lookup",
     description: "🔎 Domain lookup",
     usage: "lookup [domain]",
-    cooldown: 15,
+    cooldown: 5,
     async execute(client, message, args) {
         if (!args[0]) return await message.reply({ embeds: [client.newError("The domain argument is missing!")] });
 
@@ -17,7 +17,7 @@ module.exports = {
         }
         domain = domain.hostname ?? domain;
 
-        const embed = new MessageEmbed();
+        const embed = new MessageEmbed().setColor("#7289DA");
         const res = await client.databaseManagers.domains.getByDomain(domain);
 
         if (res) {

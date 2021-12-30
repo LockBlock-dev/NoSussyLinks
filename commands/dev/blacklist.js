@@ -6,7 +6,7 @@ module.exports = {
     usage: "blacklist [add/remove] [user id] (reason)",
     dev: true,
     async execute(client, message, args) {
-        const embed = new MessageEmbed();
+        const embed = new MessageEmbed().setColor("#7289DA");
         const reason = args[2] ? args.splice(2).join(" ") : "no reason provided";
         const member = args[1];
         const method = args[0];

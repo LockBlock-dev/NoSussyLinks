@@ -58,13 +58,10 @@ module.exports = async (client, message) => {
                         .addField("Author", `<@${message.author.id}>`)
                         .addField("Author id", message.author.id)
                         .addField(`URL${flagged.length > 1 ? "s" : ""}`, `\`\`\`${flagged.join("\n")}\n\`\`\``)
-                        .addField("Message content", message.cleanContent);
+                        .addField("Message content", message.cleanContent)
+                        .setColor("#7289DA");
 
                     await channel.send({ embeds: [embed] });
-                } else {
-                    return await message.channel.send({
-                        embeds: [client.newError("Log channel not found! Add one with the command: `p!logs [id]`")],
-                    });
                 }
             }
         } else if (sussy.length > 0) {
@@ -89,13 +86,10 @@ module.exports = async (client, message) => {
                             `Was this warning accurate? Please report the phishing URL${matches.length > 1 ? "s" : ""} by doing \`p!report ${
                                 matches[0]
                             }\``
-                        );
+                        )
+                        .setColor("#7289DA");
 
                     await channel.send({ embeds: [embed] });
-                } else {
-                    return await message.channel.send({
-                        embeds: [client.newError("Log channel not found! Add one with the command: `p!logs [id]`")],
-                    });
                 }
             }
         }

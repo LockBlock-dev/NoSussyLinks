@@ -7,7 +7,7 @@ module.exports = {
     usage: "help (command)",
     cooldown: 3,
     async execute(client, message, args) {
-        const embed = new MessageEmbed();
+        const embed = new MessageEmbed().setColor("#7289DA");
         const command = args[0];
 
         if (args.length) {

@@ -6,9 +6,11 @@ module.exports = {
     usage: "invite",
     cooldown: 15,
     async execute(client, message) {
-        const embed = new MessageEmbed().setDescription(
-            "🔗 Click [here](https://discord.com/api/oauth2/authorize?client_id=916695132424794122&permissions=11264&scope=bot) to invite the bot"
-        );
+        const embed = new MessageEmbed()
+            .setDescription(
+                "🔗 Click [here](https://discord.com/api/oauth2/authorize?client_id=916695132424794122&permissions=11264&scope=bot) to invite the bot"
+            )
+            .setColor("#7289DA");
 
         await message.reply({ embeds: [embed] });
     },

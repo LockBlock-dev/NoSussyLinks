@@ -23,7 +23,7 @@ module.exports = {
                 logsChannel: channel.id,
             });
 
-            const embed = new MessageEmbed().setDescription("🔧 Logs channel").addField("Channel set", `<#${channel.id}>`);
+            const embed = new MessageEmbed().setDescription("🔧 Logs channel").addField("Channel set", `<#${channel.id}>`).setColor("#7289DA");
             return await message.reply({ embeds: [embed] });
         }
     },

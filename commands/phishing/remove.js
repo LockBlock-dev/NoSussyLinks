@@ -22,7 +22,7 @@ module.exports = {
         if (res) {
             await client.databaseManagers.domains.remove(domain);
 
-            const embed = new MessageEmbed().setDescription("🔓 Domain removed from the database").addField("Domain", domain);
+            const embed = new MessageEmbed().setDescription("🔓 Domain removed from the database").addField("Domain", domain).setColor("#7289DA");
 
             await message.reply({ embeds: [embed] });
         } else {

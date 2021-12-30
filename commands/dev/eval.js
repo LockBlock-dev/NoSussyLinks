@@ -17,7 +17,7 @@ module.exports = {
 
         //available languages : apache, asciidoc, autohotkey, bash, coffeescript, cpp, cs, css, diff, fix, glsl, ini, js, json, md, ml, prolog, py, tex, xl, xml
 
-        embed.setDescription("🤖 Javascript evaluation").addField("Code", codeblock("js", code));
+        embed.setDescription("🤖 Javascript evaluation").addField("Code", codeblock("js", code)).setColor("#7289DA");
 
         await message.author.send({ embeds: [embed] });
     },
