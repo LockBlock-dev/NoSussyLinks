@@ -9,20 +9,29 @@ module.exports = {
     async execute(client, message, args) {
         if (!args[0]) return await message.reply({ embeds: [client.newError("The domain argument is missing!")] });
 
-        const res = await client.databaseManagers.domains.getByDomain(args[0]);
+        let domain;
+
+        try {
+            domain = new URL(args[0]);
+        } catch {
+            domain = args[0];
+        }
+        domain = domain.hostname ?? domain;
+
+        const res = await client.databaseManagers.domains.getByDomain(domain);
         if (!res) {
-            const hash = createHash("sha256").update(args[0]).digest("hex");
+            const hash = createHash("sha256").update(domain).digest("hex");
 
             await client.databaseManagers.domains.add({
                 hash: hash,
-                domain: args[0],
+                domain: domain,
             });
 
-            const embed = new MessageEmbed().setDescription("🔒 New domain added to the database").addField("Domain", args[0]).addField("Hash", hash);
+            const embed = new MessageEmbed().setDescription("🔒 New domain added to the database").addField("Domain", domain).addField("Hash", hash);
 
             await message.reply({ embeds: [embed] });
         } else {
-            await message.reply({ embeds: [client.newError(`The domain \`${args[0]}\` already exists in the database!`)] });
+            await message.reply({ embeds: [client.newError(`The domain \`${domain}\` already exists in the database!`)] });
         }
     },
 };

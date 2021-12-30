@@ -8,16 +8,25 @@ module.exports = {
     async execute(client, message, args) {
         if (!args[0]) return await message.reply({ embeds: [client.newError("The domain argument is missing!")] });
 
-        const res = await client.databaseManagers.domains.getByDomain(args[0]);
+        let domain;
+
+        try {
+            domain = new URL(args[0]);
+        } catch {
+            domain = args[0];
+        }
+        domain = domain.hostname ?? domain;
+
+        const res = await client.databaseManagers.domains.getByDomain(domain);
 
         if (res) {
-            await client.databaseManagers.domains.remove(args[0]);
+            await client.databaseManagers.domains.remove(domain);
 
-            const embed = new MessageEmbed().setDescription("🔓 Domain removed from the database").addField("Domain", args[0]);
+            const embed = new MessageEmbed().setDescription("🔓 Domain removed from the database").addField("Domain", domain);
 
             await message.reply({ embeds: [embed] });
         } else {
-            await message.reply({ embeds: [client.newError(`The domain \`${args[0]}\` does not exist in the database!`)] });
+            await message.reply({ embeds: [client.newError(`The domain \`${domain}\` does not exist in the database!`)] });
         }
     },
 };
