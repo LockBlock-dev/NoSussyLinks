@@ -4,7 +4,7 @@ module.exports = async (client, message) => {
     if (message.author.id === client.user.id || message.channel.type === "DM" || message.system || message.content.indexOf(process.env.PREFIX) === 0)
         return;
 
-    const URLregex = /[-a-zA-Z0-9@:%_\+.~#?&//=]+\.[-a-z]+\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/g;
+    const URLregex = /https|http[-a-zA-Z0-9@:%_\+.~#?&//=]+\.[-a-z]+(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/g;
 
     const matches = message.cleanContent.match(URLregex);
     const flagged = [];
@@ -27,9 +27,16 @@ module.exports = async (client, message) => {
         total = (await client.databaseManagers.stats.get("phishing_attempts")).count;
 
         for (let match of matches) {
-            let phish = new URL(match);
+            let phish;
 
-            let res = await client.databaseManagers.domains.getByDomain(phish.hostname);
+            try {
+                phish = new URL(match);
+            } catch {
+                phish = match;
+            }
+            phish = phish.hostname ?? phish;
+
+            let res = await client.databaseManagers.domains.getByDomain(phish);
             if (res) {
                 flagged.push(match);
             } else {
@@ -42,7 +49,7 @@ module.exports = async (client, message) => {
             }
         }
 
-        if (flagged.length > 0) {
+        if (flagged.length) {
             message.delete();
 
             await client.databaseManagers.stats.updateCount("phishing_attempts", total + flagged.length);
@@ -64,7 +71,7 @@ module.exports = async (client, message) => {
                     await channel.send({ embeds: [embed] });
                 }
             }
-        } else if (sussy.length > 0) {
+        } else if (sussy.length) {
             await message.delete();
 
             await client.databaseManagers.stats.updateCount("phishing_attempts", total + sussy.length);
@@ -92,6 +99,11 @@ module.exports = async (client, message) => {
                     await channel.send({ embeds: [embed] });
                 }
             }
+        }
+
+        if ((flagged.length || sussy.length) && message.member.moderatable && !message.member.isCommunicationDisabled()) {
+            await message.member.timeout(5 * 60 * 1000, "Caught sending phishing links!");
+            // That's 5 minutes
         }
     }
 };
