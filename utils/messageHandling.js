@@ -4,7 +4,7 @@ module.exports = async (client, message) => {
     if (message.author.id === client.user.id || message.channel.type === "DM" || message.system || message.content.indexOf(process.env.PREFIX) === 0)
         return;
 
-    const URLregex = /https|http[-a-zA-Z0-9@:%_\+.~#?&//=]+\.[-a-z]+(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/g;
+    const URLregex = /(https|http){1}[-a-zA-Z0-9@:%_\+.~#?&//=]+\.[-a-z]+(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/g;
 
     const matches = message.cleanContent.match(URLregex);
     const flagged = [];
