@@ -11,7 +11,7 @@ module.exports = {
 
         let channel;
 
-        if (/<#\d{18}>/.exec(args[0])[0]) channel = args[0].replace("<#", "").replace(">", "");
+        if (/<#\d{18}>/.exec(args[0])) channel = args[0].replace("<#", "").replace(">", "");
         else channel = args[0];
 
         try {

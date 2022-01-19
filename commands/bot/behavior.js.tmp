@@ -1,0 +1,58 @@
+const { MessageEmbed, MessageActionRow, MessageSelectMenu } = require("discord.js");
+
+module.exports = {
+    name: "behavior",
+    description: "🤖 Bot behavior",
+    usage: "behavior",
+    userFlag: "MANAGE_GUILD",
+    cooldown: 15,
+    async execute(client, message, args) {
+        const embed = new MessageEmbed().setDescription("🤖 Bot behavior").setColor("#7289DA");
+
+        const row = new MessageActionRow().addComponents(
+            new MessageSelectMenu()
+                .setCustomId("behavior_setup")
+                .setPlaceholder("Nothing selected")
+                .addOptions([
+                    {
+                        label: "🔗 Sussy links",
+                        description: "Delete or not???",
+                        value: "logs_channel",
+                    },
+                    {
+                        label: "🔨 Punishment",
+                        description: "Spank me daddy",
+                        value: "logs_channel",
+                    },
+                    {
+                        label: "🤖 Count",
+                        description: "69 times before ban",
+                        value: "behavior",
+                    },
+                ])
+        );
+
+        const answer = await message.channel.send({ embeds: [embed], components: [row] });
+
+        const filter = async (interaction) => {
+            await interaction.deferUpdate();
+            return interaction.customId === "setup" && interaction.user.id === message.author.id;
+        };
+        const collector = answer.createMessageComponentCollector({ componentType: "SELECT_MENU", filter, time: 15000, maxUsers: 1 });
+
+        collector.on("collect", async (interaction) => {
+            collector.stop();
+
+            switch (interaction.values[0]) {
+                case "logs_channel":
+                    embed.addField("Logs channel", "type  `p!logs [channel id]`");
+                    break;
+                case "behavior":
+                    embed.addField("Bot behavior", "TBA");
+                    break;
+            }
+
+            await answer.edit({ embeds: [embed], components: [] });
+        });
+    },
+};
