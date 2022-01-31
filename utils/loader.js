@@ -1,5 +1,4 @@
 const fs = require("fs");
-const axios = require("axios").default;
 const mongoose = require("mongoose");
 const { Collection } = require("discord.js");
 
