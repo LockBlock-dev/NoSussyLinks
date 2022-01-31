@@ -8,7 +8,7 @@ module.exports = {
     async execute(client, message) {
         const embed = new MessageEmbed()
             .setDescription(
-                "🔗 Click [here](https://discord.com/api/oauth2/authorize?client_id=916695132424794122&permissions=1099511639040&scope=bot) to invite the bot"
+                "🔗 Click [here](https://discord.com/oauth2/authorize?client_id=937768510145302529&permissions=1099511639040&scope=bot) to invite the bot"
             )
             .setColor("#7289DA");
 
