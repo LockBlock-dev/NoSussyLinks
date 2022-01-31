@@ -18,6 +18,8 @@ module.exports = async (client) => {
 
     client.cooldown = new Collection();
     client.commands = new Collection();
+    
+    client.id = client.user.id;
 
     fs.readdirSync("./commands").forEach((dir) => {
         const commands = fs.readdirSync(`./commands/${dir}/`);
