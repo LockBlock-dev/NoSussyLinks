@@ -34,12 +34,12 @@ module.exports = async (client, message) => {
 
         if (command.userFlag && !message.member.permissionsIn(message.channel).has(Permissions.FLAGS[command.userFlag]))
             return await message.reply({
-                embeds: [client.newError(`You don't have the \`${command.userFlag}\` permission to execute this command`)],
+                embeds: [client.newError(`You do not have the \`${command.userFlag}\` permission to execute this command`)],
             });
 
         // if (command.clientFlag && !message.guild.me.permissionsIn(message.channel).has(Permissions.FLAGS[command.clientFlag])) {
         //     return await message.reply({
-        //         embeds: [client.newError(`I don't have the \`${command.clientFlag}\` permission to execute this command`)],
+        //         embeds: [client.newError(`I do not have the \`${command.clientFlag}\` permission to execute this command`)],
         //     });
         // }
 
