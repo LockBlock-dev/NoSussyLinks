@@ -33,7 +33,7 @@ module.exports = {
         if (news.length) {
             const embed = new MessageEmbed()
                 .setDescription("📨 Domain report")
-                .addField("Status", "Report sent <:LockBot_check:872171596645826592>")
+                .addField("Status", "Report sent <:check:938862703877955634>")
                 .addField(`Domain${news.length > 1 ? "s" : ""}`, `\`\`\`${news.join("\n")}\n\`\`\``)
                 .setColor("#7289DA");
 

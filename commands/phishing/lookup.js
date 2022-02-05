@@ -23,7 +23,7 @@ module.exports = {
         if (res) {
             embed
                 .setDescription("🔎 Domain lookup")
-                .addField("Result", "Domain found <:LockBot_check:872171596645826592>")
+                .addField("Result", "Domain found <:check:938862703877955634>")
                 .addField("Domain", res.domain)
                 .addField("Added on", `<t:${Math.floor(res.createdAt.getTime() / 1000)}>`);
 
@@ -31,7 +31,7 @@ module.exports = {
         } else {
             embed
                 .setDescription("🔎 Domain lookup")
-                .addField("Result", "Domain not found <:LockBot_cross:872171604988293140>")
+                .addField("Result", "Domain not found <:cross:938862701822758922>")
                 .addField("\u200B", `If you think this URL is malicious,\nplease let us know:\n\`p!report ${args[0]}\``);
 
             await message.reply({ embeds: [embed] });
