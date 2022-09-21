@@ -1,5 +1,7 @@
 # NoSussyLinks
 
+## This repository is archived because Discord made [their own anti spam / anti pishing links system](https://discord.com/blog/new-anti-spam-raid-automod-safety-update).
+
 [![discord.js](https://img.shields.io/github/package-json/dependency-version/LockBlock-dev/NoSussyLinks/discord.js)](https://discord.js.org)
 
 [![GitHub stars](https://img.shields.io/github/stars/LockBlock-dev/NoSussyLinks.svg)](https://github.com/LockBlock-dev/NoSussyLinks/stargazers)
